@@ -2,7 +2,7 @@ import './App.css';
 import '../node_modules/bootstrap-icons/font/bootstrap-icons.css'
 import {useState} from 'react'
 import {render} from 'react-dom'
-let list=[1];
+let list=[];
 const input=document.getElementById('input');
 
 let btnFunction='new';
