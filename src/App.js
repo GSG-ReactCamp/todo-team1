@@ -21,11 +21,11 @@ let clickAction={
 function Itemslist (props){
   let itemsarray=props.list
   if(itemsarray.length>0){
-  const items=itemsarray.map((item,index)=>(<li class="list-group-item d-flex justify-content-between align-items-center" >
-  <span class="title">{item}</span>
+  const items=itemsarray.map((item,index)=>(<li className="list-group-item d-flex justify-content-between align-items-center" >
+  <span className="title">{item}</span>
   <span>
-      <a href="#" onClick={props.onClick.edit} data-edit ><i class="bi bi-pencil-square blue" index={index} ></i></a>
-      <a href="#" onClick={props.onClick.delete}  data-delete><i class="bi bi-x-circle red" index={index}></i></a>
+      <a href="#" onClick={props.onClick.edit} data-edit ><i className="bi bi-pencil-square blue" index={index} ></i></a>
+      <a href="#" onClick={props.onClick.delete}  data-delete><i className="bi bi-x-circle red" index={index}></i></a>
   </span>
 </li>))
 return items
@@ -46,21 +46,18 @@ value=e.target.value;
 console.log(value,1);
   }
 const add=(e)=>{
-  console.log(value,1,2,3)
-  itemsarray.push(value);
- setItemsarray(itemsarray);
-//  render(<App />,document.getElementById('root'))
-
-
+let array=[...itemsarray];
+  array.push(value);
+ setItemsarray(array);
 }
   return (
     <div className="App">
     <div className="add-task">
-              <input type="text" class="todo-input" id="input" placeholder="        Add task..." onChange={handleChange}/>
-              <button class="todo-button" type="submit" onClick={add}>+</button>
+              <input type="text" className="todo-input" id="input" placeholder="        Add task..." onChange={handleChange}/>
+              <button className="todo-button" type="submit" onClick={add}>+</button>
        </div>
-       <section class="todo-container">
-        <ul class="todo-list">
+       <section className="todo-container">
+        <ul className="todo-list">
         <Itemslist list={itemsarray} onClick={clickAction}/>
         </ul>
     </section>
