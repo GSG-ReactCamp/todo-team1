@@ -3,7 +3,7 @@ body{
   background-size: cover;
 }
 .todo-input{
-  width: 281px;
+  width: 60%;
   height: 40px;
   border: none;
   background-color: #576776;
