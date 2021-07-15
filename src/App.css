@@ -88,3 +88,7 @@ justify-content: space-evenly;
 .blue {
     color:skyblue
 }
+
+.todo-input::placeholder{
+  padding-left: 50px;
+}
