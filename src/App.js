@@ -70,7 +70,6 @@ function App() {
         <Itemslist
           className="todo-list"
           list={itemsarray}
-          onClick={clickAction}
         />
       </section>
     </div>
