@@ -27,10 +27,10 @@ function Itemslist(props) {
       >
         <span className="title">{item}</span>
         <span>
-          <a href="#" onClick={props.onClick.edit} data-edit>
+          <a href="#" onClick={clickAction.edit} data-edit>
             <i className="bi bi-pencil-square blue" index={index} />
           </a>
-          <a href="#" onClick={props.onClick.delete} data-delete>
+          <a href="#" onClick={clickAction.delete} data-delete>
             <i className="bi bi-x-circle red" index={index} />
           </a>
         </span>
