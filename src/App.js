@@ -4,19 +4,21 @@ import '../node_modules/bootstrap-icons/font/bootstrap-icons.css';
 import './App.css';
 
 // let btnFunction='new'; plan to use it later
-const clickAction = {
-  edit(e) {
-    e.preventDefault();
-    // e.target.attributes.index.value ; plan to use it later
-  },
-  delete(e) {
-    e.preventDefault();
-    // e.target.attributes.index.value ; plan to use it later
-  },
-};
 
 function Itemslist(props) {
   const itemsarray = { ...props }.list;
+
+  const clickAction = {
+    edit(e) {
+      e.preventDefault();
+      // e.target.attributes.index.value ; plan to use it later
+    },
+    delete(e) {
+      e.preventDefault();
+      // e.target.attributes.index.value ; plan to use it later
+    },
+  };
+  
   const items = useMemo(
     () => itemsarray.map((item, index) => (
       <li
