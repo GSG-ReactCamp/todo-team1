@@ -1,6 +1,4 @@
-// eslint-disable-next-line linebreak-style
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable linebreak-style */
+/* eslint-disable */
 import { useState, useMemo } from 'react';
 import '../node_modules/bootstrap-icons/font/bootstrap-icons.css';
 import './App.css';
@@ -51,6 +49,7 @@ function App() {
     itemsarray.push(inputvalue);
     setItemsarray([...itemsarray]);
   };
+  console.log(Itemslist);
   return (
     <div className="App">
       <div className="add-task">
