@@ -77,3 +77,18 @@ justify-content: space-evenly;
   border-color: #FDFCE0;
   margin: -62px;
 }
+
+
+.green {
+    color:lightgreen;
+}
+.red {
+    color:lightcoral;
+}
+.blue {
+    color:skyblue
+}
+
+.todo-input::placeholder{
+  padding-left: 50px;
+}
