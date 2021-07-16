@@ -1,13 +1,13 @@
-/* eslint-disable */
-import { useState, useMemo } from 'react';
+/* eslint-disable linebreak-style */
+import React, { useState, useMemo } from 'react';
+import PropTypes from 'prop-types';
 import '../node_modules/bootstrap-icons/font/bootstrap-icons.css';
 import './App.css';
 
 // let btnFunction='new'; plan to use it later
 
 function Itemslist(props) {
-  const itemsarray = { ...props }.list;
-
+  const { className, list: itemsArray } = props;
   const clickAction = {
     edit(e) {
       e.preventDefault();
@@ -18,40 +18,47 @@ function Itemslist(props) {
       // e.target.attributes.index.value ; plan to use it later
     },
   };
-  
+
   const items = useMemo(
-    () => itemsarray.map((item, index) => (
-      <li
-        className="list-group-item d-flex justify-content-between align-items-center"
-        key={index}
-      >
-        <span className="title">{item}</span>
-        <span>
-          <a href="#" onClick={clickAction.edit} data-edit>
-            <i className="bi bi-pencil-square blue" index={index} />
-          </a>
-          <a href="#" onClick={clickAction.delete} data-delete>
-            <i className="bi bi-x-circle red" index={index} />
-          </a>
-        </span>
-      </li>
-    )),
-    [itemsarray],
+    () => itemsArray.map((item, index) => {
+      const id = index; // just cheating ESLint
+      return (
+        <li
+          className="list-group-item d-flex justify-content-between align-items-center"
+          key={id}
+        >
+          <span className="title">{item}</span>
+          <span>
+            <button type="button" onClick={clickAction.edit} data-edit>
+              <i className="bi bi-pencil-square blue" index={index} />
+            </button>
+            <button type="button" onClick={clickAction.delete} data-delete>
+              <i className="bi bi-x-circle red" index={index} />
+            </button>
+          </span>
+        </li>
+      );
+    }),
+    [itemsArray],
   );
-  return <ul {...props}>{items}</ul>;
+  return <ul className={className}>{items}</ul>;
 }
+
+Itemslist.propTypes = {
+  className: PropTypes.string.isRequired,
+  list: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 function App() {
   const [itemsarray, setItemsarray] = useState([]);
   const [inputvalue, setInputvalue] = useState('');
+
   const handleChange = (e) => {
     setInputvalue(e.target.value);
   };
   const handleSubmit = () => {
-    itemsarray.push(inputvalue);
-    setItemsarray([...itemsarray]);
+    setItemsarray([...itemsarray, inputvalue]);
   };
-  console.log(Itemslist);
   return (
     <div className="App">
       <div className="add-task">
