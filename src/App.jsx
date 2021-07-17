@@ -1,8 +1,9 @@
 /* eslint-disable linebreak-style */
 import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import '../node_modules/bootstrap-icons/font/bootstrap-icons.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import './App.css';
+import { v4 as uuidv4 } from 'uuid';
 
 function Itemslist(props) {
   const { className, list: itemsArray, handelDelete } = props;
@@ -36,14 +37,14 @@ function App() {
   const [inputvalue, setInputvalue] = useState('');
 
   const handelDelete = (id) => {
-    const newList = [...itemsArray].filter((item) => item.id !== id);
+    const newList = itemsArray.filter((item) => item.id !== id);
     setitemsArray(newList);
   };
   const handleChange = (e) => {
     setInputvalue(e.target.value);
   };
   const handleSubmit = () => {
-    setitemsArray([...itemsArray, { id: Date.now(), task: inputvalue }]);
+    setitemsArray([...itemsArray, { id: uuidv4(), task: inputvalue }]);
   };
   return (
     <div className="App">
