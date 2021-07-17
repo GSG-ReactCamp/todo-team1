@@ -1,44 +1,26 @@
 /* eslint-disable linebreak-style */
 import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import '../node_modules/bootstrap-icons/font/bootstrap-icons.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import './App.css';
-
-// let btnFunction='new'; plan to use it later
+import { v4 as uuidv4 } from 'uuid';
 
 function Itemslist(props) {
-  const { className, list: itemsArray } = props;
-  const clickAction = {
-    edit(e) {
-      e.preventDefault();
-      // e.target.attributes.index.value ; plan to use it later
-    },
-    delete(e) {
-      e.preventDefault();
-      // e.target.attributes.index.value ; plan to use it later
-    },
-  };
-
+  const { className, list: itemsArray, handelDelete } = props;
   const items = useMemo(
-    () => itemsArray.map((item, index) => {
-      const id = index; // just cheating ESLint
-      return (
-        <li
-          className="list-group-item d-flex justify-content-between align-items-center"
-          key={id}
-        >
-          <span className="title">{item}</span>
-          <span>
-            <button type="button" onClick={clickAction.edit} data-edit>
-              <i className="bi bi-pencil-square blue" index={index} />
-            </button>
-            <button type="button" onClick={clickAction.delete} data-delete>
-              <i className="bi bi-x-circle red" index={index} />
-            </button>
-          </span>
-        </li>
-      );
-    }),
+    () => itemsArray.map((item) => (
+      <li
+        className="list-group-item d-flex justify-content-between align-items-center"
+        key={item.id}
+      >
+        <span className="title">{item.task}</span>
+        <span>
+          <button type="button" onClick={() => handelDelete(item.id)} data-delete>
+            <i className="bi bi-x-circle red" index={item.id} />
+          </button>
+        </span>
+      </li>
+    )),
     [itemsArray],
   );
   return <ul className={className}>{items}</ul>;
@@ -47,17 +29,22 @@ function Itemslist(props) {
 Itemslist.propTypes = {
   className: PropTypes.string.isRequired,
   list: PropTypes.arrayOf(PropTypes.string).isRequired,
+  handelDelete: PropTypes.func.isRequired,
 };
 
 function App() {
-  const [itemsarray, setItemsarray] = useState([]);
+  const [itemsArray, setitemsArray] = useState([]);
   const [inputvalue, setInputvalue] = useState('');
 
+  const handelDelete = (id) => {
+    const newList = itemsArray.filter((item) => item.id !== id);
+    setitemsArray(newList);
+  };
   const handleChange = (e) => {
     setInputvalue(e.target.value);
   };
   const handleSubmit = () => {
-    setItemsarray([...itemsarray, inputvalue]);
+    setitemsArray([...itemsArray, { id: uuidv4(), task: inputvalue }]);
   };
   return (
     <div className="App">
@@ -76,7 +63,8 @@ function App() {
       <section className="todo-container">
         <Itemslist
           className="todo-list"
-          list={itemsarray}
+          list={itemsArray}
+          handelDelete={handelDelete}
         />
       </section>
     </div>
