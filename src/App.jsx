@@ -68,6 +68,7 @@ function App() {
   const handelEdit = (index) => {
     setEditindex(index);
     setBtnFunction('edit');
+    setInputvalue(itemsArray[index].task);
     textInput.current.focus();
   };
 
