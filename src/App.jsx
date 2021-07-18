@@ -61,7 +61,7 @@ function App() {
     const newArray = [...itemsArray];
     newArray[index].isDone = !newArray[index].isDone;
     setItemsArray(newArray);
-    setBtnFunction('new'); // in order if the user press edit then done without submiting new value
+    setBtnFunction('newItem'); // in order if the user press edit then done without submiting new value
   };
 
   const handelEdit = (index) => {
