@@ -100,3 +100,8 @@ justify-content: space-evenly;
 .todo-input::placeholder{
   padding-left: 50px;
 }
+
+.done{
+  text-decoration: line-through;
+  text-decoration-color: red;
+}
