@@ -33,13 +33,13 @@ function Itemslist(props) {
 
 Itemslist.propTypes = {
   className: PropTypes.string.isRequired,
-  list: PropTypes.arrayOf(PropTypes.string).isRequired,
+  list: PropTypes.arrayOf(PropTypes.object).isRequired,
   handelDelete: PropTypes.func.isRequired,
   handelEdit: PropTypes.func.isRequired,
 };
 
 function App() {
-  const [itemsArray, setitemsArray] = useState([]);
+  const [itemsArray, setItemsArray] = useState([]);
   const [inputvalue, setInputvalue] = useState('');
   const [btnFunction, setBtnFunction] = useState('newItem');
   const [editindex, setEditindex] = useState(-1);
@@ -51,19 +51,23 @@ function App() {
 
   const handelDelete = (id) => {
     const newList = itemsArray.filter((item) => item.id !== id);
-    setitemsArray(newList);
+    setItemsArray(newList);
     setBtnFunction('newItem'); // in order if the user press edit then delete without submiting new value
   };
   const handleChange = (e) => {
     setInputvalue(e.target.value);
   };
   const handleSubmit = {
-    newItem() { setitemsArray([...itemsArray, { id: uuidv4(), task: inputvalue }]); },
+    newItem() {
+      setItemsArray([...itemsArray, { id: uuidv4(), task: inputvalue }]);
+      setInputvalue('');
+    },
     edit() {
       const newArray = [...itemsArray];
       newArray[editindex].task = inputvalue;
-      setitemsArray(newArray);
+      setItemsArray(newArray);
       setBtnFunction('newItem');
+      setInputvalue('');
     },
 
   };
@@ -76,6 +80,7 @@ function App() {
           id="input"
           placeholder="Add task..."
           onChange={handleChange}
+          value={inputvalue}
         />
         <button className="todo-button" type="submit" onClick={handleSubmit[btnFunction]}>
           +
